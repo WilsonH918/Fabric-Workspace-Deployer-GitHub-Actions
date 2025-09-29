@@ -98,17 +98,18 @@ The repository is organized as follows:
 
 
 fabric-workspace-deployer/
-├── .github/
+├── .github/                     # GitHub-specific files
 │   └── workflows/
-│       └── main.yaml              # GitHub Actions workflow definition
-├── config/
-│   └── workspaces.json            # Workspace definitions
-├── scripts/
-│   ├── deploy.py                  # Deployment logic
-│   └── render_config.py          # Jinja2 rendering logic
-├── templates/
-│   └── workspace_config_template.j2  # Jinja2 template for workspace config
-└── README.md                      # Project documentation
+│       └── main.yaml            # GitHub Actions workflow definition
+├── config/                      # Workspace configuration files
+│   └── workspaces.json          # Workspace definitions
+├── scripts/                     # Python scripts for deployment
+│   ├── deploy.py                # Deployment logic
+│   └── render_config.py         # Jinja2 rendering logic
+├── templates/                   # Jinja2 templates
+│   └── workspace_config_template.j2  # Template for workspace config
+└── README.md                    # Project documentation
+
 
 
 ---
@@ -116,5 +117,6 @@ fabric-workspace-deployer/
 ## Maintainers
 
 Built by and for data engineers and architects who value automation, reproducibility, and clean infrastructure-as-code practices.
+
 
 
