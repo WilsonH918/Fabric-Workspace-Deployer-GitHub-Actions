@@ -7,6 +7,8 @@ A production-grade automation framework for deploying Microsoft Fabric workspace
 ## 🧠 Architecture Overview
 
 This solution follows a modular and secure architecture:
+<img width="1536" height="1024" alt="jpeg (1)" src="https://github.com/user-attachments/assets/3940ded8-5cbd-4a67-b3d6-80dc6ceb14c7" />
+
 
 - **GitHub Actions**: Orchestrates the deployment pipeline triggered manually or on code changes.
 - **Python Scripts**:
@@ -121,4 +123,5 @@ fabric-workspace-deployer/
 ## 👥 Maintainers
 
 Built by and for data engineers and architects who value automation, reproducibility, and clean infrastructure-as-code practices.
+
 
