@@ -91,24 +91,30 @@ To manually deploy Fabric workspaces:
 
 ---
 
+
 ## Project Structure
+
+The repository is organized as follows:
+
 
 fabric-workspace-deployer/
 ├── .github/
 │   └── workflows/
-│       └── main.yaml
+│       └── main.yaml              # GitHub Actions workflow definition
 ├── config/
-│   └── workspaces.json
+│   └── workspaces.json            # Workspace definitions
 ├── scripts/
-│   ├── deploy.py
-│   └── render_config.py
+│   ├── deploy.py                  # Deployment logic
+│   └── render_config.py          # Jinja2 rendering logic
 ├── templates/
-│   └── workspace_config_template.j2
-└── README.md
+│   └── workspace_config_template.j2  # Jinja2 template for workspace config
+└── README.md                      # Project documentation
+
 
 ---
 
 ## Maintainers
 
 Built by and for data engineers and architects who value automation, reproducibility, and clean infrastructure-as-code practices.
+
 
