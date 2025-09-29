@@ -49,7 +49,6 @@ for ws in config["workspaces"]:
         continue
 
     print(f"Creating workspace: {ws['name']}")
-    capacity_id = 
     workspace_id = create_workspace(token, ws["name"], capacity_id)
     if workspace_id and "lakehouse" in ws:
         print(f"Creating lakehouse: {ws['lakehouse']} in {ws['name']}")
