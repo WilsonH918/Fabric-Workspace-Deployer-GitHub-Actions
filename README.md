@@ -38,9 +38,17 @@ Create or edit `config/workspaces.json`:
 
 
 [
-  { "name": "Data Engineer Dev", "lakehouse": "DE_Dev_Lakehouse" },
-  { "name": "Data Engineer Prod", "lakehouse": "DE_Prod_Lakehouse" },
-  { "name": "Report Workspace" }
+  {
+    "name": "Data Engineer Dev",
+    "lakehouse": "DE_Dev_Lakehouse"
+  },
+  {
+    "name": "Data Engineer Prod",
+    "lakehouse": "DE_Prod_Lakehouse"
+  },
+  {
+    "name": "Report Workspace"
+  }
 ]
 
 Usage
@@ -89,4 +97,5 @@ fabric-workspace-deployer/
 
 Maintainers
 Built by and for data engineers and architects who value automation, reproducibility, and clean infrastructure-as-code practices.
+
 
