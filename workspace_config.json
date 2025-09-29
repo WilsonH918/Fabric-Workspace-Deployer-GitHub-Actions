@@ -1,0 +1,18 @@
+{
+  "workspaces": [
+    {
+      "name": "Data Engineer Dev",
+      "type": "lakehouse",
+      "lakehouseName": "DE_Dev_Lakehouse"
+    },
+    {
+      "name": "Data Engineer Prod",
+      "type": "lakehouse",
+      "lakehouseName": "DE_Prod_Lakehouse"
+    },
+    {
+      "name": "Report Workspace",
+      "type": "report"
+    }
+  ]
+}
