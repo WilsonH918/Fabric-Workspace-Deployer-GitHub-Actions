@@ -1,11 +1,5 @@
 import json, requests, os
 
-# 🔐 Replace these with your actual values
-client_id = "4973351f-c1f8-473f-a9a7-815f670f48cd"
-client_secret = "ibI8Q~4vrBjEPL8oXa-_8iFOVlvCHiJow3A9za-N"
-tenant_id = "b38dfeb3-1654-4f43-bc5b-efe2121197f5"
-
-
 # Get access token from Microsoft Entra ID
 def get_access_token():
     url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
@@ -69,6 +63,10 @@ def main():
         config = json.load(f)
 
     capacity_id = config.get("capacityId")
+    client_id = config.get("client_id")
+    client_secret = config.get("client_secret")
+    tenant_id = config.get("tenant_id")
+
     if not capacity_id:
         print("No capacityId found in config. Exiting.")
         return
