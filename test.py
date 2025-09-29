@@ -40,8 +40,12 @@ def get_existing_workspaces(token):
         print("Failed to fetch existing workspaces:", response.text)
         return []
 
-
+# run deployment
+token = get_access_token()
 existing = get_existing_workspaces(token)
+
+with open("workspace_config.json") as f:
+    config = json.load(f)
 
 for ws in config["workspaces"]:
     if ws["name"] in existing:
