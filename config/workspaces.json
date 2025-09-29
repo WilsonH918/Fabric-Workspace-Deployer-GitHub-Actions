@@ -1,10 +1,10 @@
 [
   {
-    "name": "Data Engineer Dev",
+    "name": "Data Engineer Dev2",
     "lakehouse": "DE_Dev_Lakehouse"
   },
   {
-    "name": "Data Engineer Prod",
+    "name": "Data Engineer Prod2",
     "lakehouse": "DE_Prod_Lakehouse"
   },
   {
