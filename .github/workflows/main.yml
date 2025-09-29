@@ -34,4 +34,4 @@ jobs:
       run: python scripts/render_config.py
 
     - name: Run deployment script
-      run: python scripts/deploy.py
+      run: python deploy.py
