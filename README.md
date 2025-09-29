@@ -22,7 +22,7 @@ This solution follows a modular and secure architecture:
 
 ### 1. Clone the Repository
 
-
+```
 git clone https://github.com/your-org/fabric-workspace-deployer.git
 cd fabric-workspace-deployer
 ```
@@ -121,3 +121,4 @@ fabric-workspace-deployer/
 ## 👥 Maintainers
 
 Built by and for data engineers and architects who value automation, reproducibility, and clean infrastructure-as-code practices.
+
