@@ -51,36 +51,48 @@ Create or edit `config/workspaces.json`:
   }
 ]
 
-Usage
+## Usage
+
 Manual Trigger via GitHub Actions
 
-Go to the Actions tab.
-Select Deploy Fabric Workspaces workflow.
-Click Run workflow.
+To manually deploy Fabric workspaces:
 
-This will:
+1. Go to the **Actions** tab in your GitHub repository.
+2. Select the **Deploy Fabric Workspaces** workflow.
+3. Click **Run workflow**.
 
-Load secrets and workspace definitions.
-Render workspace_config.json using Jinja2.
-Deploy workspaces and lakehouses via Fabric API.
+### This will:
 
+- Load secrets and workspace definitions.
+- Render `workspace_config.json` using Jinja2.
+- Deploy workspaces and lakehouses via the Fabric API.
 
-Customization
+---
 
-Multiple Clients: Create separate workspace definition files (e.g. clientA_workspaces.json) and modify render_config.py to load based on input.
-Environment Support: Use matrix strategy in GitHub Actions to deploy to dev, staging, prod.
-Logging: Extend deploy.py with logging to file or external monitoring tools.
+## Customization
 
+- **Multiple Clients**  
+  Create separate workspace definition files (e.g. `clientA_workspaces.json`) and modify `render_config.py` to load based on input.
 
+- **Environment Support**  
+  Use a matrix strategy in GitHub Actions to deploy to `dev`, `staging`, and `prod`.
 
-Best Practices
+- **Logging**  
+  Extend `deploy.py` with logging to a file or external monitoring tools.
 
-Use version-controlled workspace definitions for auditability.
-Rotate secrets regularly and use GitHub environments for separation.
-Validate workspace names to avoid duplicates or naming conflicts.
-Modularize Python scripts for easier testing and extension.
+---
 
-Project Structure
+## Best Practices
+
+- Use version-controlled workspace definitions for auditability.
+- Rotate secrets regularly and use GitHub environments for separation.
+- Validate workspace names to avoid duplicates or naming conflicts.
+- Modularize Python scripts for easier testing and extension.
+
+---
+
+## Project Structure
+
 fabric-workspace-deployer/
 ├── .github/
 │   └── workflows/
@@ -94,8 +106,9 @@ fabric-workspace-deployer/
 │   └── workspace_config_template.j2
 └── README.md
 
+---
 
-Maintainers
+## Maintainers
+
 Built by and for data engineers and architects who value automation, reproducibility, and clean infrastructure-as-code practices.
-
 
