@@ -1,9 +1,10 @@
-name: Deploy Fabric Workspaces
-
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      config_file:
+        description: 'Path to config file'
+        required: true
+        default: 'config/workspace_config.json'
 
 jobs:
   deploy:
@@ -22,4 +23,10 @@ jobs:
       run: pip install requests
 
     - name: Run deployment script
-      run: python deploy.py
+      env:
+        TENANT_ID: ${{ secrets.TENANT_ID }}
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+        CAPACITY_ID: ${{ secrets.CAPACITY_ID }}
+        CONFIG_FILE: ${{ github.event.inputs.config_file }}
+      run: python scripts/deploy.py
