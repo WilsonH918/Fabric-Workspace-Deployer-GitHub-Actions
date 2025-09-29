@@ -57,8 +57,7 @@ def create_lakehouse(token, workspace_id, lakehouse_name):
 
 # Main execution
 def main():
-    token = get_access_token()
-
+    
     with open("workspace_config.json") as f:
         config = json.load(f)
 
@@ -67,6 +66,7 @@ def main():
     client_secret = config.get("client_secret")
     tenant_id = config.get("tenant_id")
 
+    token = get_access_token()
     if not capacity_id:
         print("No capacityId found in config. Exiting.")
         return
