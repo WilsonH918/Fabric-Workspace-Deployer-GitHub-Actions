@@ -1,9 +1,7 @@
+name: Deploy Fabric Workspaces
+
 on:
   workflow_dispatch:
-    inputs:
-      client_name:
-        description: 'Client name (e.g., clientA)'
-        required: true
 
 jobs:
   deploy:
@@ -23,12 +21,11 @@ jobs:
 
     - name: Set environment variables
       run: |
-        echo "CLIENT_NAME=${{ github.event.inputs.client_name }}" >> $GITHUB_ENV
-        echo "TENANT_ID=${{ secrets[format('{0}_TENANT_ID', github.event.inputs.client_name)] }}" >> $GITHUB_ENV
-        echo "CLIENT_ID=${{ secrets[format('{0}_CLIENT_ID', github.event.inputs.client_name)] }}" >> $GITHUB_ENV
-        echo "CLIENT_SECRET=${{ secrets[format('{0}_CLIENT_SECRET', github.event.inputs.client_name)] }}" >> $GITHUB_ENV
-        echo "CAPACITY_ID=${{ secrets[format('{0}_CAPACITY_ID', github.event.inputs.client_name)] }}" >> $GITHUB_ENV
-        echo "WORKSPACES_JSON=${{ secrets[format('{0}_WORKSPACES_JSON', github.event.inputs.client_name)] }}" >> $GITHUB_ENV
+        echo "TENANT_ID=${{ secrets.TENANT_ID }}" >> $GITHUB_ENV
+        echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> $GITHUB_ENV
+        echo "CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> $GITHUB_ENV
+        echo "CAPACITY_ID=${{ secrets.CAPACITY_ID }}" >> $GITHUB_ENV
+        echo "WORKSPACES_JSON=${{ secrets.WORKSPACES_JSON }}" >> $GITHUB_ENV
 
     - name: Render config from template
       run: python scripts/render_config.py

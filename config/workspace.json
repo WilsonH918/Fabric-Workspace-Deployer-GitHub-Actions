@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Data Engineer Dev",
+    "lakehouse": "DE_Dev_Lakehouse"
+  },
+  {
+    "name": "Data Engineer Prod",
+    "lakehouse": "DE_Prod_Lakehouse"
+  },
+  {
+    "name": "Report Workspace"
+  }
+]
