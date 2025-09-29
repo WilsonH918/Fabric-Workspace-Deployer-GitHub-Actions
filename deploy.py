@@ -44,6 +44,9 @@ def get_existing_workspaces(token):
 token = get_access_token()
 existing = get_existing_workspaces(token)
 
+with open("workspace_config.json") as f:
+    config = json.load(f)
+
 for ws in config["workspaces"]:
     if ws["name"] in existing:
         print(f"Workspace '{ws['name']}' already exists. Skipping.")
