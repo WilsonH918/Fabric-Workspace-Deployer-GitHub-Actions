@@ -21,22 +21,26 @@ This solution follows a modular and secure architecture:
 ## ⚙️ Setup Instructions
 
 ### 1. Clone the Repository
+
+
 git clone https://github.com/your-org/fabric-workspace-deployer.git
 cd fabric-workspace-deployer
+```
 
 ### 2. Define Secrets in GitHub
-Go to Settings → Secrets and variables → Actions and add:
 
-TENANT_ID
-CLIENT_ID
-CLIENT_SECRET
-CAPACITY_ID
+Go to **Settings → Secrets and variables → Actions** and add:
+
+- `TENANT_ID`
+- `CLIENT_ID`
+- `CLIENT_SECRET`
+- `CAPACITY_ID`
 
 ### 3. Define Workspace Structure
 
 Create or edit `config/workspaces.json`:
 
-
+```json
 [
   {
     "name": "Data Engineer Dev",
@@ -50,10 +54,13 @@ Create or edit `config/workspaces.json`:
     "name": "Report Workspace"
   }
 ]
+```
 
-## Usage
+---
 
-Manual Trigger via GitHub Actions
+## 🚀 Usage
+
+### Manual Trigger via GitHub Actions
 
 To manually deploy Fabric workspaces:
 
@@ -61,7 +68,7 @@ To manually deploy Fabric workspaces:
 2. Select the **Deploy Fabric Workspaces** workflow.
 3. Click **Run workflow**.
 
-### This will:
+#### This will:
 
 - Load secrets and workspace definitions.
 - Render `workspace_config.json` using Jinja2.
@@ -69,7 +76,7 @@ To manually deploy Fabric workspaces:
 
 ---
 
-## Customization
+## 🛠️ Customization
 
 - **Multiple Clients**  
   Create separate workspace definition files (e.g. `clientA_workspaces.json`) and modify `render_config.py` to load based on input.
@@ -82,7 +89,7 @@ To manually deploy Fabric workspaces:
 
 ---
 
-## Best Practices
+## ✅ Best Practices
 
 - Use version-controlled workspace definitions for auditability.
 - Rotate secrets regularly and use GitHub environments for separation.
@@ -91,8 +98,7 @@ To manually deploy Fabric workspaces:
 
 ---
 
-
-## Project Structure
+## 📁 Project Structure
 
 The repository is organized as follows:
 
@@ -109,17 +115,9 @@ fabric-workspace-deployer/
 ├── templates/                   # Jinja2 templates
 │   └── workspace_config_template.j2  # Template for workspace config
 └── README.md                    # Project documentation
-```
-
-
 
 ---
 
-## Maintainers
+## 👥 Maintainers
 
 Built by and for data engineers and architects who value automation, reproducibility, and clean infrastructure-as-code practices.
-
-
-
-
-
