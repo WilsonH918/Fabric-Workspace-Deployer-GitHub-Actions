@@ -33,7 +33,9 @@ CLIENT_SECRET
 CAPACITY_ID
 
 ### 3. Define Workspace Structure
-Create or edit config/workspaces.json:
+
+Create or edit `config/workspaces.json`:
+
 
 [
   { "name": "Data Engineer Dev", "lakehouse": "DE_Dev_Lakehouse" },
@@ -87,3 +89,4 @@ fabric-workspace-deployer/
 
 Maintainers
 Built by and for data engineers and architects who value automation, reproducibility, and clean infrastructure-as-code practices.
+
