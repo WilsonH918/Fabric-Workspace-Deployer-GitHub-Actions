@@ -42,10 +42,13 @@ def get_existing_workspaces(token):
 
 # run deployment
 token = get_access_token()
-existing = get_existing_workspaces(token)
 
 with open("workspace_config.json") as f:
     config = json.load(f)
+
+
+capacity_id = config.get("capacityId")
+existing = get_existing_workspaces(token)
 
 for ws in config["workspaces"]:
     if ws["name"] in existing:
