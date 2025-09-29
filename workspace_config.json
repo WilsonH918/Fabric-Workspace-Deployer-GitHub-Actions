@@ -1,18 +1,16 @@
 {
+  "capacityId": "15F1D84D-B4A4-4754-92D1-54C4CD85B9F3",
   "workspaces": [
     {
       "name": "Data Engineer Dev",
-      "type": "lakehouse",
-      "lakehouseName": "DE_Dev_Lakehouse"
+      "lakehouse": "DE_Dev_Lakehouse"
     },
     {
       "name": "Data Engineer Prod",
-      "type": "lakehouse",
-      "lakehouseName": "DE_Prod_Lakehouse"
+      "lakehouse": "DE_Prod_Lakehouse"
     },
     {
-      "name": "Report Workspace",
-      "type": "report"
+      "name": "Report Workspace"
     }
   ]
 }
