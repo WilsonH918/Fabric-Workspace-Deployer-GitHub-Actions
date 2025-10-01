@@ -9,6 +9,9 @@ A production-grade automation framework for deploying Microsoft Fabric workspace
 This solution follows a modular and secure architecture:
 <img width="468" height="224" alt="image" src="https://github.com/user-attachments/assets/1a758672-4236-4d37-b4c6-4be1761301b1" />
 
+
+  
+
 - **GitHub Actions**: Orchestrates the deployment pipeline triggered manually or on code changes.
 - **Python Scripts**:
   - `render_config.py`: Renders workspace configuration from Jinja2 templates and environment variables.
