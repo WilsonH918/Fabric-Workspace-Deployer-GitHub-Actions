@@ -7,8 +7,10 @@ A production-grade automation framework for deploying Microsoft Fabric workspace
 ## 🧠 Architecture Overview
 
 This solution follows a modular and secure architecture:
-<img width="1536" height="1024" alt="jpeg (1)" src="https://github.com/user-attachments/assets/3940ded8-5cbd-4a67-b3d6-80dc6ceb14c7" />
+<img width="936" height="448" alt="image" src="https://github.com/user-attachments/assets/1a758672-4236-4d37-b4c6-4be1761301b1" />
 
+
+  
 
 - **GitHub Actions**: Orchestrates the deployment pipeline triggered manually or on code changes.
 - **Python Scripts**:
@@ -104,24 +106,41 @@ To manually deploy Fabric workspaces:
 
 The repository is organized as follows:
 
-
-fabric-workspace-deployer/
-├── .github/                     # GitHub-specific files
-│   └── workflows/
-│       └── main.yaml            # GitHub Actions workflow definition
-├── config/                      # Workspace configuration files
-│   └── workspaces.json          # Workspace definitions
-├── scripts/                     # Python scripts for deployment
-│   ├── deploy.py                # Deployment logic
-│   └── render_config.py         # Jinja2 rendering logic
-├── templates/                   # Jinja2 templates
-│   └── workspace_config_template.j2  # Template for workspace config
-└── README.md                    # Project documentation
-
+```json
+{
+  "fabric-workspace-deployer": {
+    ".github": {
+      "description": "GitHub-specific files",
+      "workflows": {
+        "main.yaml": "GitHub Actions workflow definition"
+      }
+    },
+    "config": {
+      "description": "Workspace configuration files",
+      "workspaces.json": "Workspace definitions"
+    },
+    "scripts": {
+      "description": "Python scripts for deployment",
+      "deploy.py": "Deployment logic",
+      "render_config.py": "Jinja2 rendering logic"
+    },
+    "templates": {
+      "description": "Jinja2 templates",
+      "workspace_config_template.j2": "Template for workspace config"
+    },
+    "README.md": "Project documentation"
+  }
+}
+```
 ---
 
 ## 👥 Maintainers
 
 Built by and for data engineers and architects who value automation, reproducibility, and clean infrastructure-as-code practices.
+
+
+
+
+
 
 
