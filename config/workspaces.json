@@ -6,7 +6,8 @@
     "pipelineStage": "Development",
     "folders": [
           { "name": "Notebooks" },
-          { "name": "Pipelines" }
+          { "name": "Pipelines" },
+          { "name": "Reports" }
         ]
 
   },
