@@ -66,7 +66,7 @@ def create_warehouse(token, workspace_id, warehouse_name):
     if response.status_code == 201:
         print(f"Warehouse '{warehouse_name}' created successfully.")
     else:
-        print(f"Error creating warehouse '{warehouse_name}':", response.text
+        print(f"Error creating warehouse '{warehouse_name}':", response.text)
 
 
 # Main execution
