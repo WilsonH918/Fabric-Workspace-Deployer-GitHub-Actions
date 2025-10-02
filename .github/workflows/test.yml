@@ -30,7 +30,7 @@ jobs:
         run: python scripts/render_config.py
 
       - name: Upload rendered config
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: workspace-config
           path: workspace_config.json
@@ -51,7 +51,7 @@ jobs:
         run: pip install requests
 
       - name: Download rendered config
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: workspace-config
 
