@@ -6,7 +6,11 @@
   "workspaces": [
     {% for ws in workspaces %}
     {
-      "name": "{{ ws.name }}"{% if ws.lakehouse %}, "lakehouse": "{{ ws.lakehouse }}" {% endif %}
+      "name": "{{ ws.name }}"
+      {% if ws.lakehouse %}, "lakehouse": "{{ ws.lakehouse }}" {% endif %}
+      {% if ws.warehouse %}, "warehouse": "{{ ws.warehouse }}" {% endif %}
+      {% if ws.notebook %}, "notebook": "{{ ws.notebook }}" {% endif %}
+      {% if ws.pipelineStage %}, "pipelineStage": "{{ ws.pipelineStage }}" {% endif %}
     }{% if not loop.last %},{% endif %}
     {% endfor %}
   ]

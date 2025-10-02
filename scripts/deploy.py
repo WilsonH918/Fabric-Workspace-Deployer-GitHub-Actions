@@ -68,10 +68,38 @@ def create_warehouse(token, workspace_id, warehouse_name):
     else:
         print(f"Error creating warehouse '{warehouse_name}':", response.text)
 
+# Create deployment pipeline
+def create_deployment_pipeline(token, name, description, stages):
+    url = "https://api.fabric.microsoft.com/v1/deploymentPipelines"
+    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+    payload = {
+        "displayName": name,
+        "description": description,
+        "stages": [{"displayName": stage, "description": f"{stage} stage", "isPublic": False} for stage in stages]
+    }
+    response = requests.post(url, json=payload, headers=headers)
+    if response.status_code == 201:
+        pipeline = response.json()
+        print(f"Deployment pipeline '{name}' created successfully.")
+        return pipeline["id"], {s["displayName"]: s["id"] for s in pipeline["stages"]}
+    else:
+        print(f"Error creating deployment pipeline '{name}':", response.text)
+        return None, {}
+
+# Assign workspace to pipeline stage
+def assign_workspace_to_stage(token, pipeline_id, stage_id, workspace_id):
+    url = f"https://api.fabric.microsoft.com/v1/deploymentPipelines/{pipeline_id}/stages/{stage_id}/assignWorkspace"
+    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+    payload = {"workspaceId": workspace_id}
+    response = requests.post(url, json=payload, headers=headers)
+    if response.status_code == 200:
+        print(f"Workspace assigned to stage '{stage_id}' in pipeline '{pipeline_id}'.")
+    else:
+        print(f"Error assigning workspace to stage: {response.text}")
+
 
 # Main execution
 def main():
-
     with open("workspace_config.json") as f:
         config = json.load(f)
 
@@ -81,31 +109,57 @@ def main():
     tenant_id = config.get("tenant_id")
 
     token = get_access_token(tenant_id, client_id, client_secret)
-    
+
     if not capacity_id:
         print("No capacityId found in config. Exiting.")
         return
 
-    existing = get_existing_workspaces(token)
+    existing_workspaces = get_existing_workspaces(token)
+    workspace_ids = {}
 
+    # Group workspaces by pipelineStage
+    pipeline_workspaces = defaultdict(list)
+    for ws in config["workspaces"]:
+        stage = ws.get("pipelineStage")
+        if stage:
+            pipeline_workspaces[stage].append(ws)
+
+    # Create deployment pipeline if needed
+    if pipeline_workspaces:
+        pipeline_name = "Auto Deployment Pipeline"
+        pipeline_description = "Generated from config"
+        stage_names = list(pipeline_workspaces.keys())
+        pipeline_id, stage_id_map = create_deployment_pipeline(token, pipeline_name, pipeline_description, stage_names)
+    else:
+        pipeline_id = None
+        stage_id_map = {}
+
+    # Create all workspaces
     for ws in config["workspaces"]:
         name = ws["name"]
-        if name in existing:
-            print(f"Workspace '{name}' already exists. Skipping.")
-            continue
-
-        print(f"Creating workspace: {name}")
-        workspace_id = create_workspace(token, name, capacity_id)
-
+        workspace_id = existing_workspaces.get(name)
 
         if workspace_id:
-            if "lakehouse" in ws:
-                print(f"Creating lakehouse: {ws['lakehouse']} in workspace '{name}'")
-                create_lakehouse(token, workspace_id, ws["lakehouse"])
+            print(f"Workspace '{name}' already exists. Using existing ID.")
+        else:
+            print(f"Creating workspace: {name}")
+            workspace_id = create_workspace(token, name, capacity_id)
 
-            if "warehouse" in ws:
-                print(f"Creating warehouse: {ws['warehouse']} in workspace '{name}'")
-                create_warehouse(token, workspace_id, ws["warehouse"])
+        if not workspace_id:
+            continue
+
+        workspace_ids[name] = workspace_id
+
+        if "lakehouse" in ws:
+            create_lakehouse(token, workspace_id, ws["lakehouse"])
+
+        if "warehouse" in ws:
+            create_warehouse(token, workspace_id, ws["warehouse"])
+
+        # Assign to pipeline stage if applicable
+        stage_name = ws.get("pipelineStage")
+        if pipeline_id and stage_name and stage_name in stage_id_map:
+            assign_workspace_to_stage(token, pipeline_id, stage_id_map[stage_name], workspace_id)
 
 if __name__ == "__main__":
     main()
