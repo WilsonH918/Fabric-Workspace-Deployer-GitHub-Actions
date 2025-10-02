@@ -1,11 +1,11 @@
 [
   {
-    "name": "Data Engineer Dev2",
-    "lakehouse": "DE_Dev_Lakehouse"
+    "name": "Data Engineer Dev",
+    "lakehouse": "Fabric_Lakehouse",
+    "warehouse": "Fabric_Warehouse"
   },
   {
-    "name": "Data Engineer Prod2",
-    "lakehouse": "DE_Prod_Lakehouse"
+    "name": "Data Engineer Prod"
   },
   {
     "name": "Report Workspace"

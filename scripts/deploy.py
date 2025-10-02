@@ -55,6 +55,20 @@ def create_lakehouse(token, workspace_id, lakehouse_name):
     else:
         print(f"Error creating lakehouse '{lakehouse_name}':", response.text)
 
+
+# Create a warehouse in a workspace
+def create_warehouse(token, workspace_id, warehouse_name):
+    url = f"https://api.fabric.microsoft.com/v1/workspaces/{workspace_id}/warehouses"
+    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+    payload = {"displayName": warehouse_name}
+    response = requests.post(url, json=payload, headers=headers)
+
+    if response.status_code == 201:
+        print(f"Warehouse '{warehouse_name}' created successfully.")
+    else:
+        print(f"Error creating warehouse '{warehouse_name}':", response.text
+
+
 # Main execution
 def main():
 
@@ -83,9 +97,15 @@ def main():
         print(f"Creating workspace: {name}")
         workspace_id = create_workspace(token, name, capacity_id)
 
-        if workspace_id and "lakehouse" in ws:
-            print(f"Creating lakehouse: {ws['lakehouse']} in workspace '{name}'")
-            create_lakehouse(token, workspace_id, ws["lakehouse"])
+
+        if workspace_id:
+            if "lakehouse" in ws:
+                print(f"Creating lakehouse: {ws['lakehouse']} in workspace '{name}'")
+                create_lakehouse(token, workspace_id, ws["lakehouse"])
+
+            if "warehouse" in ws:
+                print(f"Creating warehouse: {ws['warehouse']} in workspace '{name}'")
+                create_warehouse(token, workspace_id, ws["warehouse"])
 
 if __name__ == "__main__":
     main()
