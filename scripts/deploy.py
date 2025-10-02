@@ -1,4 +1,6 @@
 import json, requests, os
+from collections import defaultdict
+
 
 # Get access token from Microsoft Entra ID
 def get_access_token(tenant_id, client_id, client_secret):
