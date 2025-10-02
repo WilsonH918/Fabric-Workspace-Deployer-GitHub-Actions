@@ -1,0 +1,46 @@
+name: Deploy Fabric Workspaces CI/CD
+
+
+jobs:
+  render-config:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests jinja2
+
+      - name: Set environment variables
+        run: |
+          echo "TENANT_ID=${{ secrets.TENANT_ID }}" >> $GITHUB_ENV
+          echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> $GITHUB_ENV
+          echo "CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> $GITHUB_ENV
+          echo "CAPACITY_ID=${{ secrets.CAPACITY_ID }}" >> $GITHUB_ENV
+          echo "USER_OBJECT_ID=${{ secrets.USER_OBJECT_ID }}" >> $GITHUB_ENV
+
+      - name: Render config
+        run: python scripts/render_config.py
+
+  deploy:
+    needs: render-config
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run deployment
+        run: python scripts/deploy.py
