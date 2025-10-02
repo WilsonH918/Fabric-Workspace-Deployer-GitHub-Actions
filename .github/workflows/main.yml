@@ -25,7 +25,7 @@ jobs:
         echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> $GITHUB_ENV
         echo "CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> $GITHUB_ENV
         echo "CAPACITY_ID=${{ secrets.CAPACITY_ID }}" >> $GITHUB_ENV
-        echo "WORKSPACES_JSON=${{ secrets.WORKSPACES_JSON }}" >> $GITHUB_ENV
+        echo "USER_OBJECT_ID=${{ secrets.USER_OBJECT_ID }}" >> $GITHUB_ENV
 
     - name: Render config from template
       run: python scripts/render_config.py

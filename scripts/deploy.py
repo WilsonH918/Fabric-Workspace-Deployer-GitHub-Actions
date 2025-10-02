@@ -142,7 +142,7 @@ def main():
     client_id = config.get("client_id")
     client_secret = config.get("client_secret")
     tenant_id = config.get("tenant_id")
-    userObjectId = config.get("userObjectId")
+    user_object_id = config.get("user_object_id")
 
     token = get_access_token(tenant_id, client_id, client_secret)
 
@@ -166,7 +166,7 @@ def main():
         pipeline_description = "Generated from config"
         stage_names = list(pipeline_workspaces.keys())
         pipeline_id, stage_id_map = create_deployment_pipeline(token, pipeline_name, pipeline_description, stage_names)
-        assign_pipeline_admin(token, pipeline_id, userObjectId)
+        assign_pipeline_admin(token, pipeline_id, user_object_id)
     else:
         pipeline_id = None
         stage_id_map = {}
@@ -181,7 +181,7 @@ def main():
         else:
             print(f"Creating workspace: {name}")
             workspace_id = create_workspace(token, name, capacity_id)
-            assign_workspace_admin(token, workspace_id, userObjectId)
+            assign_workspace_admin(token, workspace_id, user_object_id)
 
         if not workspace_id:
             continue
