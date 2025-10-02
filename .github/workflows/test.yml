@@ -1,5 +1,7 @@
 name: Deploy Fabric Workspaces CI/CD
 
+on:
+  workflow_dispatch:
 
 jobs:
   render-config:
