@@ -77,6 +77,13 @@ def create_warehouse(token, workspace_id, warehouse_name):
     payload = {"displayName": warehouse_name}
     response = requests.post(url, json=payload, headers=headers)
 
+    ## delete later
+    print(f"Raw response for warehouse '{warehouse_name}':")
+    print("Status Code:", response.status_code)
+    print("Response Text:", response.text)
+    print("Response JSON:", response.json() if response.text else "No JSON body")
+
+
     if response.status_code == 201:
         print(f"Warehouse '{warehouse_name}' created successfully.")
     else:
@@ -140,7 +147,7 @@ def main():
 
     # Create deployment pipeline if needed
     if pipeline_workspaces:
-        pipeline_name = "Auto Deployment Pipeline"
+        pipeline_name = "Data Engineer Deployment Pipeline"
         pipeline_description = "Generated from config"
         stage_names = list(pipeline_workspaces.keys())
         pipeline_id, stage_id_map = create_deployment_pipeline(token, pipeline_name, pipeline_description, stage_names)
