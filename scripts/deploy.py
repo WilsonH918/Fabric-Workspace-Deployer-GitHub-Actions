@@ -63,6 +63,22 @@ def assign_workspace_admin(token, workspace_id, user_object_id):
     else:
         print(f"Error assigning workspace admin: {response.status_code} - {response.text}")
 
+# Create Folders
+def create_workspace_folder(token, workspace_id, folder_name, parent_folder_id=None):
+    url = f"https://api.fabric.microsoft.com/v1/workspaces/{workspace_id}/folders"
+    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+    payload = {"displayName": folder_name}
+    if parent_folder_id:
+        payload["parentFolderId"] = parent_folder_id
+
+    response = requests.post(url, json=payload, headers=headers)
+    if response.status_code == 201:
+        folder_id = response.json()["id"]
+        print(f"Folder '{folder_name}' created successfully in workspace '{workspace_id}'.")
+        return folder_id
+    else:
+        print(f"Error creating folder '{folder_name}':", response.text)
+
 # Create a lakehouse in a workspace
 def create_lakehouse(token, workspace_id, lakehouse_name):
     url = f"https://api.fabric.microsoft.com/v1/workspaces/{workspace_id}/lakehouses"
@@ -193,6 +209,12 @@ def main():
 
         if "warehouse" in ws:
             create_warehouse(token, workspace_id, ws["warehouse"])
+        
+        if "folders" in ws:
+            for folder in ws["folders"]:
+                folder_name = folder.get("name")
+                if folder_name:
+                    create_workspace_folder(token, workspace_id, folder_name)
 
         # Assign to pipeline stage if applicable
         stage_name = ws.get("pipelineStage")

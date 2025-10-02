@@ -3,11 +3,20 @@
     "name": "Data Engineer Dev",
     "lakehouse": "Fabric_Lakehouse",
     "warehouse": "Fabric_Warehouse",
-    "pipelineStage": "Development"
+    "pipelineStage": "Development",
+    "folders": [
+          { "name": "Notebooks" },
+          { "name": "Pipelines" }
+        ]
+
   },
   {
     "name": "Data Engineer Prod",
-    "pipelineStage": "Production"
+    "pipelineStage": "Production",
+    "folders": [
+          { "name": "Notebooks" },
+          { "name": "Pipelines" }
+        ]
   },
   {
     "name": "Report Workspace"

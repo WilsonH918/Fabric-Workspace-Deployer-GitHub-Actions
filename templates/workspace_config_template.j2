@@ -12,6 +12,13 @@
       {% if ws.warehouse %}, "warehouse": "{{ ws.warehouse }}" {% endif %}
       {% if ws.notebook %}, "notebook": "{{ ws.notebook }}" {% endif %}
       {% if ws.pipelineStage %}, "pipelineStage": "{{ ws.pipelineStage }}" {% endif %}
+      {% if ws.folders %}
+      , "folders": [
+        {% for folder in ws.folders %}
+        { "name": "{{ folder.name }}" }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+      {% endif %}
     }{% if not loop.last %},{% endif %}
     {% endfor %}
   ]
