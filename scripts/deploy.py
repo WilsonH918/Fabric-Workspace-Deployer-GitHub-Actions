@@ -16,17 +16,6 @@ def get_access_token(tenant_id, client_id, client_secret):
     return response.json()["access_token"]
 
 # Get existing workspace names
-# def get_existing_workspaces(token):
-#     url = "https://api.fabric.microsoft.com/v1/workspaces"
-#     headers = {"Authorization": f"Bearer {token}"}
-#     response = requests.get(url, headers=headers)
-#     if response.status_code == 200:
-#         return [ws["displayName"] for ws in response.json().get("value", [])]
-#     else:
-#         print("Failed to fetch existing workspaces:", response.text)
-#         return []
-
-
 def get_existing_workspaces(token):
     url = "https://api.fabric.microsoft.com/v1/workspaces"
     headers = {"Authorization": f"Bearer {token}"}
@@ -57,6 +46,23 @@ def create_workspace(token, name, capacity_id):
         print(f"Error creating workspace '{name}':", response.text)
         return None
 
+# Assign workspace admin
+def assign_workspace_admin(token, workspace_id, user_object_id):
+    url = f"https://api.fabric.microsoft.com/v1/workspaces/{workspace_id}/roleAssignments"
+    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+    payload = {
+        "principal": {
+            "id": user_object_id,
+            "type": "User"
+        },
+        "role": "Admin"
+    }
+    response = requests.post(url, json=payload, headers=headers)
+    if response.status_code == 201:
+        print(f"User '{user_object_id}' assigned as Admin to workspace '{workspace_id}'.")
+    else:
+        print(f"Error assigning workspace admin: {response.status_code} - {response.text}")
+
 # Create a lakehouse in a workspace
 def create_lakehouse(token, workspace_id, lakehouse_name):
     url = f"https://api.fabric.microsoft.com/v1/workspaces/{workspace_id}/lakehouses"
@@ -76,16 +82,8 @@ def create_warehouse(token, workspace_id, warehouse_name):
     headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
     payload = {"displayName": warehouse_name}
     response = requests.post(url, json=payload, headers=headers)
-
-    ## delete later
-    print(f"Raw response for warehouse '{warehouse_name}':")
-    print("Status Code:", response.status_code)
-    print("Response Text:", response.text)
-    print("Response JSON:", response.json() if response.text else "No JSON body")
-
-
-    if response.status_code == 201:
-        print(f"Warehouse '{warehouse_name}' created successfully.")
+    if response.status_code in [201, 202]:
+        print(f"Warehouse '{warehouse_name}' created or accepted successfully.")
     else:
         print(f"Error creating warehouse '{warehouse_name}':", response.text)
 
@@ -118,6 +116,22 @@ def assign_workspace_to_stage(token, pipeline_id, stage_id, workspace_id):
     else:
         print(f"Error assigning workspace to stage: {response.text}")
 
+# Assign deployment pipeline to user
+def assign_pipeline_admin(token, pipeline_id, user_object_id):
+    url = f"https://api.fabric.microsoft.com/v1/deploymentPipelines/{pipeline_id}/roleAssignments"
+    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+    payload = {
+        "principal": {
+            "id": user_object_id,
+            "type": "User"
+        },
+        "role": "Admin"
+    }
+    response = requests.post(url, json=payload, headers=headers)
+    if response.status_code == 200:
+        print(f"User '{user_object_id}' assigned as admin to pipeline '{pipeline_id}'.")
+    else:
+        print(f"Error assigning pipeline admin: {response.status_code} - {response.text}")
 
 # Main execution
 def main():
@@ -128,6 +142,7 @@ def main():
     client_id = config.get("client_id")
     client_secret = config.get("client_secret")
     tenant_id = config.get("tenant_id")
+    userObjectId = config.get("userObjectId")
 
     token = get_access_token(tenant_id, client_id, client_secret)
 
@@ -151,6 +166,7 @@ def main():
         pipeline_description = "Generated from config"
         stage_names = list(pipeline_workspaces.keys())
         pipeline_id, stage_id_map = create_deployment_pipeline(token, pipeline_name, pipeline_description, stage_names)
+        assign_pipeline_admin(token, pipeline_id, userObjectId)
     else:
         pipeline_id = None
         stage_id_map = {}
@@ -165,6 +181,7 @@ def main():
         else:
             print(f"Creating workspace: {name}")
             workspace_id = create_workspace(token, name, capacity_id)
+            assign_workspace_admin(token, workspace_id, userObjectId)
 
         if not workspace_id:
             continue

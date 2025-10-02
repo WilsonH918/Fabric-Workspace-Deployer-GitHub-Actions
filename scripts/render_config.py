@@ -10,6 +10,7 @@ def render_config():
         "client_id": os.getenv("CLIENT_ID"),
         "client_secret": os.getenv("CLIENT_SECRET"),
         "capacity_id": os.getenv("CAPACITY_ID"),
+        "userObjectId": os.getenv("userObjectId"),
         "workspaces": []
     }
 
