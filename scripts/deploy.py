@@ -162,7 +162,7 @@ def main():
 
     # Create deployment pipeline if needed
     if pipeline_workspaces:
-        pipeline_name = "Data Engineer Deployment Pipeline 123"
+        pipeline_name = "Data Engineer Deployment Pipeline"
         pipeline_description = "Generated from config"
         stage_names = list(pipeline_workspaces.keys())
         pipeline_id, stage_id_map = create_deployment_pipeline(token, pipeline_name, pipeline_description, stage_names)
