@@ -1,12 +1,12 @@
 [
   {
-    "name": "Data Engineer Dev3",
+    "name": "Data Engineer Dev",
     "lakehouse": "Fabric_Lakehouse",
     "warehouse": "Fabric_Warehouse",
     "pipelineStage": "Development"
   },
   {
-    "name": "Data Engineer Prod3",
+    "name": "Data Engineer Prod",
     "pipelineStage": "Production"
   },
   {
