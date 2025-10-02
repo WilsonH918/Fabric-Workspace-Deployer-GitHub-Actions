@@ -16,15 +16,27 @@ def get_access_token(tenant_id, client_id, client_secret):
     return response.json()["access_token"]
 
 # Get existing workspace names
+# def get_existing_workspaces(token):
+#     url = "https://api.fabric.microsoft.com/v1/workspaces"
+#     headers = {"Authorization": f"Bearer {token}"}
+#     response = requests.get(url, headers=headers)
+#     if response.status_code == 200:
+#         return [ws["displayName"] for ws in response.json().get("value", [])]
+#     else:
+#         print("Failed to fetch existing workspaces:", response.text)
+#         return []
+
+
 def get_existing_workspaces(token):
     url = "https://api.fabric.microsoft.com/v1/workspaces"
     headers = {"Authorization": f"Bearer {token}"}
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
-        return [ws["displayName"] for ws in response.json().get("value", [])]
+        return {ws["displayName"]: ws["id"] for ws in response.json().get("value", [])}
     else:
         print("Failed to fetch existing workspaces:", response.text)
-        return []
+        return {}
+
 
 # Create a new workspace
 def create_workspace(token, name, capacity_id):
