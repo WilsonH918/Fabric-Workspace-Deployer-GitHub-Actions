@@ -143,6 +143,8 @@ def main():
     client_secret = config.get("client_secret")
     tenant_id = config.get("tenant_id")
     user_object_id = config.get("user_object_id")
+    print(tenant_id)
+    print(user_object_id)
 
     token = get_access_token(tenant_id, client_id, client_secret)
 
