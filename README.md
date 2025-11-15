@@ -1,10 +1,10 @@
-# 🚀 Fabric Workspace Deployer
+# Fabric Workspace Deployer
 
 A production-grade automation framework for deploying Microsoft Fabric workspaces and lakehouses using **GitHub Actions**, **Python**, and **Jinja2 templating**. Designed for **data engineers** and **data architects** to streamline environment provisioning across clients and projects.
 
 ---
 
-## 🧠 Architecture Overview
+## Architecture Overview
 
 This solution follows a modular and secure architecture:
 <img width="936" height="448" alt="image" src="https://github.com/user-attachments/assets/1a758672-4236-4d37-b4c6-4be1761301b1" />
@@ -22,7 +22,7 @@ This solution follows a modular and secure architecture:
 
 ---
 
-## ⚙️ Setup Instructions
+## Setup Instructions
 
 ### 1. Clone the Repository
 
@@ -62,7 +62,7 @@ Create or edit `config/workspaces.json`:
 
 ---
 
-## 🚀 Usage
+## Usage
 
 ### Manual Trigger via GitHub Actions
 
@@ -80,7 +80,7 @@ To manually deploy Fabric workspaces:
 
 ---
 
-## 🛠️ Customization
+## Customization
 
 - **Multiple Clients**  
   Create separate workspace definition files (e.g. `clientA_workspaces.json`) and modify `render_config.py` to load based on input.
@@ -93,7 +93,7 @@ To manually deploy Fabric workspaces:
 
 ---
 
-## ✅ Best Practices
+## Best Practices
 
 - Use version-controlled workspace definitions for auditability.
 - Rotate secrets regularly and use GitHub environments for separation.
@@ -102,7 +102,7 @@ To manually deploy Fabric workspaces:
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 The repository is organized as follows:
 
@@ -134,9 +134,10 @@ The repository is organized as follows:
 ```
 ---
 
-## 👥 Maintainers
+## Maintainers
 
 Built by and for data engineers and architects who value automation, reproducibility, and clean infrastructure-as-code practices.
+
 
 
 
