@@ -14,13 +14,14 @@ This solution follows a modular and secure architecture:
 
   
 
-- **GitHub Actions**: Orchestrates the deployment pipeline triggered manually or on code changes.
-- **Python Scripts**:
-  - `render_config.py`: Renders workspace configuration from Jinja2 templates and environment variables.
-  - `deploy.py`: Authenticates with Microsoft Entra ID and deploys workspaces and lakehouses via Fabric API.
-- **Jinja2 Templates**: Dynamically generate `workspace_config.json` from secrets and workspace definitions.
-- **GitHub Secrets**: Securely store credentials and deployment parameters.
-- **Workspace Definitions**: Stored in `config/workspaces.json` for version control and easy customization.
+- **GitHub Actions**: Orchestrates the deployment pipeline, triggered manually or on code changes.  
+- **Python Scripts**:  
+  - `render_config.py`: Renders workspace configuration from Jinja2 templates and environment variables.  
+  - `deploy.py`: Authenticates with Microsoft Entra ID and deploys workspaces and lakehouses via the **Fabric REST API**.  
+- **Jinja2 Templates**: Dynamically generate `workspace_config.json` from secrets and workspace definitions.  
+- **GitHub Secrets**: Securely store credentials and deployment parameters.  
+- **Workspace Definitions**: Stored in `config/workspaces.json` for version control and easy customization.  
+- **Terraform (Optional)**: Provides an alternative approach for infrastructure-as-code deployments of Fabric workspaces if preferred.
 
 ---
 
@@ -100,13 +101,13 @@ To manually deploy Fabric workspaces:
 - Use version-controlled workspace definitions for auditability.
 - Rotate secrets regularly and use GitHub environments for separation.
 - Validate workspace names to avoid duplicates or naming conflicts.
-- Modularize Python scripts for easier testing and extension.
+- Modularise Python scripts for easier testing and extension.
 
 ---
 
 ## Project Structure
 
-The repository is organized as follows:
+The repository is organised as follows:
 
 ```json
 {
@@ -139,6 +140,7 @@ The repository is organized as follows:
 ## Maintainers
 
 Built by and for data engineers and architects who value automation, reproducibility, and clean infrastructure-as-code practices.
+
 
 
 
