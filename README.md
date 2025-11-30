@@ -1,6 +1,8 @@
 # Fabric Workspace Deployer
-
 A production-grade automation framework for deploying Microsoft Fabric workspaces and lakehouses using **GitHub Actions**, **Python**, and **Jinja2 templating**. Designed for **data engineers** and **data architects** to streamline environment provisioning across clients and projects.
+
+This project provides **two ways to manage Fabric administration tasks**: either via the **Fabric REST API** or using **Terraform**, giving flexibility depending on your workflow and infrastructure preferences.
+
 
 ---
 
